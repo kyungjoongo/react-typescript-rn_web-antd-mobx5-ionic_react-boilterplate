@@ -1,0 +1,7 @@
+{
+  "name": "ts_react_bbb",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
