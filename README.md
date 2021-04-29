@@ -12,7 +12,7 @@
     - 🤣  mobx5 ( mobx-react-lite 2, mobx-react 6) (super!)
     - 🤣  react-app-rewired 2 
     - 😎  The super ultra easiest global state management, mobile or web (basic configuration of optimized Ui framework for implementing responsive web)
-    - 😎  <font style="color:orange;"> (wow! If you want to create a mobile web first and quickly create an app, you can easily create an android/ios app by using an ionic capacitor.) </font>
+    - 😎  <span color="red"> (wow! If you want to create a mobile web first and quickly create an app, you can easily create an android/ios app by using an ionic capacitor.) </span>
      
 ![Alt Text](https://github.com/kyungjoongo/react-typescript-rn_web-antd-mobx5-ionic_react-boilterplate/blob/main/src/demo.gif)
 
