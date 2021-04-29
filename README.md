@@ -24,5 +24,5 @@ react-app-rewired 2
 
 ### !!  You can focus more on business logic and make code easier and easier to read!
 
-## Please throw away the complicated, difficult to read, maze of redux
-### Get This Super ultra easy elegant Boilerplate, implement your business logic quickly and easily and start your project right now!
+## !! Please throw away the complicated, difficult to read, maze of redux
+### !! Get This Super ultra easy elegant Boilerplate, implement your business logic quickly and easily and start your project right now!
