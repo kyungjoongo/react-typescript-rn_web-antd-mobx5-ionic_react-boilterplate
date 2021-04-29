@@ -17,6 +17,8 @@
      
 ![Alt Text](https://github.com/kyungjoongo/react-typescript-rn_web-antd-mobx5-ionic_react-boilterplate/blob/main/src/demo.gif)
 
+![Alt Text](https://github.com/kyungjoongo/react-typescript-rn_web-antd-mobx5-ionic_react-boilterplate/blob/main/src/demo_ios.gif)
+
 - Whether it's using React Hook, class-based implementation, or mixing, it's a versatile boiler plate.
 
 # 🤢 Please abandon the complex, difficult and hard-to-read centralized redux.🤢
