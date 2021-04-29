@@ -19,3 +19,7 @@ react-app-rewired 2
 
 - Whether it's using React Hook, class-based implementation, or mixing, it's a versatile boiler plate.
 
+# Please abandon the complex, difficult and hard-to-read centralized redux.
+### !! Get it right now, test it, and start your project right away.
+
+### !!  You can focus more on business logic and make code easier and easier to read!
