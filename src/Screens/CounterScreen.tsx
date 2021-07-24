@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {decrement5, increment, setResult} from "./counterReducer";
+import {increment, setResults} from "./counterSlice";
 import {Button, Text, View} from "react-native";
 
 type TypeCounter = {
-    number: number,
+    counter: number,
     results: [],
 }
 
@@ -12,7 +12,10 @@ type TypeCounter = {
 export const CounterScreen = (props: any) => {
     // useDispatch 사용
     const dispatch = useDispatch()
-    const globalStore: any = useSelector((state: TypeCounter) => {
+    const counterStore: any = useSelector((state: TypeCounter) => {
+
+        console.info("counterStore====>", state);
+
         return state;
     })
 
@@ -22,7 +25,7 @@ export const CounterScreen = (props: any) => {
 
     async function init() {
         let result = await fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json())
-        dispatch(setResult(result))
+        dispatch(setResults(result))
     }
 
     return (
@@ -34,19 +37,11 @@ export const CounterScreen = (props: any) => {
             >
                 sldkfldskf
             </Button>
-
-            <Button title={'decrement5'}
-                    onPress={() => {
-                        dispatch(decrement5())
-                    }}
-            >
-            </Button>
-
             <View>
-                <Text>{globalStore.number}</Text>
-                <Text>{globalStore.number}</Text>
+                <Text>{counterStore.counter}</Text>
+                <Text>{counterStore.counter}</Text>
             </View>
-            {globalStore.results.map((item: any, index: number) => {
+            {counterStore.results.map((item: any, index: number) => {
                 return (
                     <View>
                         <Text>{item.name}</Text>

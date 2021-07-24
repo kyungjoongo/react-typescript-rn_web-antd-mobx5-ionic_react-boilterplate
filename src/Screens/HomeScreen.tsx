@@ -1,21 +1,23 @@
-import {ActivityIndicator, Button, Image, Text, View, StyleSheet} from "react-native";
+import {ActivityIndicator, Button, StyleSheet, Text, View} from "react-native";
 import React, {useEffect, useRef, useState} from "react";
 import {IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from "@ionic/react";
-import {useObserver} from "mobx-react-lite";
-import globalStore from "../Stores/GlobalStore";
-import {getBookmarks} from "./SharedService";
+import {observer, useObserver} from "mobx-react-lite";
 import {TypeBookMark} from "../Types/Types";
 import {Button as AButton, message} from 'antd'
 import sharedService from "../Stores/SharedService";
+import {useStores} from "./useStore";
 
 type Props = {
     history: any
 }
 
 
-export const HomeScreen = (props: Props) => {
+const HomeScreen = (props: Props) => {
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    const {globalStore, historyStore} = useStores()
+
     const willMount = useRef(true);
     if (willMount.current) {
         //todo : componentWillMount
@@ -27,21 +29,11 @@ export const HomeScreen = (props: Props) => {
     }, [])
 
     async function initFetchData() {
-        await sharedService.getList();
-
-    }
-
-    async function insertOne() {
-    }
-
-    async function updateOne() {
+        await globalStore.getList();
     }
 
 
-    async function delelteOne(paramId: any) {
-    }
-
-    return useObserver(() => (
+    return (
         <IonPage>
             <IonHeader>
                 <IonToolbar>
@@ -60,6 +52,10 @@ export const HomeScreen = (props: Props) => {
                         <IonTitle>Home</IonTitle>
                     </IonToolbar>
                 </View>
+                <Button title={'dslfk'} onPress={() => historyStore.incrementCount()}/>
+                <Text>
+                    testCount: {historyStore.testCount}
+                </Text>
                 <View style={{height: 50}}/>
                 <Button title={'push'} onPress={() => {
                     props.history.push('/DetailScreen')
@@ -94,11 +90,11 @@ export const HomeScreen = (props: Props) => {
                     <AButton onClick={() => message.success('antd button', 1)} style={{width: '100%'}} type="primary">Primary
                         Button</AButton>
                 </View>
-                {sharedService.loading ? <View style={{width: window.innerWidth, height: 300, marginTop: 70}}>
+                {globalStore.loading ? <View style={{width: window.innerWidth, height: 300, marginTop: 70}}>
                         <ActivityIndicator color={'orange'} size='large'/>
                     </View> :
                     <View style={Styles.test001}>
-                        {sharedService.results.map((item: TypeBookMark, index) => {
+                        {globalStore.results.map((item: TypeBookMark, index) => {
                             return (
                                 <View style={{justifyContent: "center",}}>
                                     <Text>{item.name}</Text>
@@ -113,7 +109,7 @@ export const HomeScreen = (props: Props) => {
                 </IonButton>
             </IonContent>
         </IonPage>
-    ))
+    )
 }
 
 const Styles = StyleSheet.create({
@@ -123,5 +119,7 @@ const Styles = StyleSheet.create({
         alignItems: 'center',
     },
 });
+
+export default observer(HomeScreen)
 
 

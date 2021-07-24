@@ -25,15 +25,6 @@ class SharedService {
 
 
 
-    async getList() {
-        this.setLoading(true)
-        this.setResults(await fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json()))
-        setTimeout(() => {
-            this.setLoading(false)
-        }, 1111)
-    }
-
-
 }
 
 const sharedService = new SharedService();
