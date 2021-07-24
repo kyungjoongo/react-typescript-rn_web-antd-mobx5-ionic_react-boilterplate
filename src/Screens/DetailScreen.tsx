@@ -1,5 +1,5 @@
-import {Button, Text, View} from "react-native";
-import React from "react";
+import {ActivityIndicator, Button, Text, View} from "react-native";
+import React, {useEffect} from "react";
 import {IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from "@ionic/react";
 import {observer, useObserver} from "mobx-react-lite";
 import {useStores} from "./useStore";
@@ -13,7 +13,12 @@ export default observer(
     function DetailScreen(props: Props) {
         const {globalStore} = useStores()
 
-        return useObserver(() => (
+        useEffect(() => {
+            globalStore.getListImageList()
+        }, [])
+
+
+        return (
             <IonPage>
                 <IonHeader>
                     <IonToolbar>
@@ -49,9 +54,26 @@ export default observer(
                             {globalStore.count}
                         </Text>
                     </View>
+                    <View style={{
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+
+                    }}>
+
+                        {globalStore.loading ?
+                            <ActivityIndicator color={'red'}/> : globalStore.imageList.map((item: any) => {
+                                return (
+
+                                    <img src={item.urls.regular} style={{width: 250, height: 250, margin: 5,}}/>
+
+                                )
+                            })}
+                    </View>
                 </IonContent>
             </IonPage>
-        ))
+        )
     }
 )
 

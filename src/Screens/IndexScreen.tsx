@@ -17,12 +17,16 @@ type State = {};
 export default class IndexScreen extends React.Component<Props, State> {
 
     componentDidMount() {
-        this.props.globalStore.getList()
-        this.props.historyStore.incrementCount()
+        const {globalStore, historyStore} = this.props
+
+        globalStore.getList()
     }
 
 
     render() {
+
+
+
         return (
             <div>
                 <div>

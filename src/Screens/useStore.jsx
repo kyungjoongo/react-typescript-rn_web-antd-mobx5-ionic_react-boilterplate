@@ -4,7 +4,9 @@ import {GlobalStore} from "../Stores/GlobalStore";
 
 export const storesContext = React.createContext({
     globalStore: new GlobalStore(),
-    historyStore: new HistoryStore()
+    historyStore: new HistoryStore(),
 })
 
-export const useStores = () => React.useContext(storesContext)
+export const useStores = () => {
+    return React.useContext(storesContext)
+}
