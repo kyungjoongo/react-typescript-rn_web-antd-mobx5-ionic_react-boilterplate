@@ -1,16 +1,14 @@
 import {action, computed, observable} from "mobx";
 import _ from "lodash";
 import {makeAutoObservable} from 'mobx'
-
+import {toJS} from 'mobx';
 
 export class GlobalStore {
     constructor() {
         makeAutoObservable(this)
     }
 
-    results = []
     loading: boolean = false;
-
 
     count = 0;
     count2 = 0;
@@ -31,6 +29,7 @@ export class GlobalStore {
         this.count2 -= 5;
     }
 
+    results = []
 
     setResults(arrList: any) {
         this.results = arrList;
@@ -44,12 +43,19 @@ export class GlobalStore {
     async getList() {
         this.setLoading(true)
         this.setResults(await fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json()))
+
+        console.info("getList====>", toJS(this.results));
         setTimeout(() => {
             this.setLoading(false)
         }, 550)
     }
 
+
     imageList = []
+
+    setImageList(arrList: any) {
+        this.imageList = arrList
+    }
 
     @computed
     get doubleCount() {
@@ -67,12 +73,12 @@ export class GlobalStore {
         });
         this.imageList = result
 
+        console.info("getListImageList====>", toJS(this.imageList));
+
         setTimeout(() => {
             this.setLoading(false)
         }, 550)
     }
-
-
 }
 
 

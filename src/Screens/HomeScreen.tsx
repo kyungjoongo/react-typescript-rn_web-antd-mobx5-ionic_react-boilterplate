@@ -1,40 +1,41 @@
 import {ActivityIndicator, Button, StyleSheet, Text, View} from "react-native";
 import React, {useEffect, useRef, useState} from "react";
 import {IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from "@ionic/react";
-import {observer, useObserver} from "mobx-react-lite";
+import {observer} from "mobx-react-lite";
 import {TypeBookMark} from "../Types/Types";
 import {Button as AButton, message} from 'antd'
-import sharedService from "../Stores/SharedService";
 import {useStores} from "./useStore";
+import _ from 'lodash'
 
 type Props = {
     history: any
 }
 
+export default observer(
+    function HomeeScreen(props: Props) {
+        const [results, setResults] = useState([]);
+        const [loading, setLoading] = useState(false);
 
-export default function HomeeScreen(props: Props) {
-    const [results, setResults] = useState([]);
-    const [loading, setLoading] = useState(false);
+        const {globalStore, historyStore} = useStores()
 
-    const {globalStore, historyStore} = useStores()
-
-    const willMount = useRef(true);
-    if (willMount.current) {
-        //todo : componentWillMount
-    }
+        const willMount = useRef(true);
+        if (willMount.current) {
+            //todo : componentWillMount
+        }
 
 
-    useEffect(() => {
-        initFetchData();
-    }, [])
+        useEffect(() => {
+            if (_.isEmpty(globalStore.results)) {
+                initFetchData();
+            }
+        }, [])
 
-    async function initFetchData() {
-        await globalStore.getList();
-        await historyStore.incrementCount()
-    }
+        async function initFetchData() {
+            await globalStore.getList();
+            await historyStore.incrementCount()
+        }
 
-    return useObserver(() => (
-        (
+        return (
             <IonPage>
                 <IonHeader>
                     <IonToolbar>
@@ -58,7 +59,7 @@ export default function HomeeScreen(props: Props) {
                         testCount: {historyStore.testCount}
                     </Text>
                     <Text>
-                        doubleCount  {globalStore.doubleCount}
+                        doubleCount {globalStore.doubleCount}
                     </Text>
                     <View style={{height: 50}}/>
                     <Button title={'push'} onPress={() => {
@@ -115,8 +116,8 @@ export default function HomeeScreen(props: Props) {
                 </IonContent>
             </IonPage>
         )
-    ))
-}
+    }
+)
 
 const Styles = StyleSheet.create({
     test001: {
