@@ -2,10 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './Styles/index.css';
 import App from './App';
+import {GlobalStore} from "./Stores/GlobalStore";
+import {HistoryStore} from "./Stores/HistoryStore";
+import {Provider} from "mobx-react";
+
+const globalStore = new GlobalStore()
+const historyStore = new HistoryStore()
+
+const stores = {
+    globalStore,
+    historyStore,
+};
 
 ReactDOM.render(
-    <React.StrictMode>
+    <Provider {...stores}>
         <App/>
-    </React.StrictMode>,
+    </Provider>
+
+    ,
     document.getElementById('root')
 );

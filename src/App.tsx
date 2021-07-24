@@ -22,7 +22,7 @@ import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 import WriteScreen from "./Screens/WriteScreen";
 import {CounterScreen} from "./Screens/CounterScreen";
-import HomeScreen from "./Screens/HomeScreen";
+import IndexScreen from "./Screens/IndexScreen";
 
 type Props = {};
 type State = {
@@ -41,16 +41,17 @@ export default class App extends React.Component<Props, State> {
 
     render() {
         return (
-            <IonApp>
-                <IonReactRouter>
-                    <IonRouterOutlet>
-                        <Route path="/" exact component={HomeScreen}/>
-                        <Route path="/CounterScreen" exact component={CounterScreen}/>
-                        <Route path="/DetailScreen" exact component={DetailScreen}/>
-                        <Route path="/WriteScreen" exact component={WriteScreen}/>
-                    </IonRouterOutlet>
-                </IonReactRouter>
-            </IonApp>
+                <IonApp>
+                    <IonReactRouter>
+                        <IonRouterOutlet>
+                            <Route path="/" exact component={IndexScreen}/>
+                            {/*<Route path="/" exact component={HomeScreen}/>*/}
+                            <Route path="/CounterScreen" exact component={CounterScreen}/>
+                            <Route path="/DetailScreen" exact component={DetailScreen}/>
+                            <Route path="/WriteScreen" exact component={WriteScreen}/>
+                        </IonRouterOutlet>
+                    </IonReactRouter>
+                </IonApp>
         );
     };
 };
