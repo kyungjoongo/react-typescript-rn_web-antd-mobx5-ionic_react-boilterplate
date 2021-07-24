@@ -4,7 +4,7 @@ import {IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, Io
 import {observer} from "mobx-react-lite";
 import {TypeBookMark} from "../Types/Types";
 import {Button as AButton, message} from 'antd'
-import {useStores} from "./useStore";
+import {useStore} from "../Utils/useStore";
 import _ from 'lodash'
 
 type Props = {
@@ -13,16 +13,7 @@ type Props = {
 
 export default observer(
     function HomeeScreen(props: Props) {
-        const [results, setResults] = useState([]);
-        const [loading, setLoading] = useState(false);
-
-        const {globalStore, historyStore} = useStores()
-
-        const willMount = useRef(true);
-        if (willMount.current) {
-            //todo : componentWillMount
-        }
-
+        const {globalStore, historyStore} = useStore()
 
         useEffect(() => {
             if (_.isEmpty(globalStore.results)) {
@@ -48,7 +39,7 @@ export default observer(
                     </IonToolbar>
                 </IonHeader>
                 <IonContent>
-                    {loading && <ActivityIndicator color={'red'}/>}
+                    {globalStore.loading && <ActivityIndicator color={'red'}/>}
                     <View>
                         <IonToolbar>
                             <IonTitle>Home</IonTitle>

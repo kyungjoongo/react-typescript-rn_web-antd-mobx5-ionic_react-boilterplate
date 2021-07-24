@@ -7,6 +7,6 @@ export const storesContext = React.createContext({
     historyStore: new HistoryStore(),
 })
 
-export const useStores = () => {
+export const useStore = () => {
     return React.useContext(storesContext)
 }

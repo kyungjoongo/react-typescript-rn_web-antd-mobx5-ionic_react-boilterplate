@@ -42,8 +42,8 @@ export class GlobalStore {
      */
     async getList() {
         this.setLoading(true)
-        this.setResults(await fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json()))
-
+        let _result = await fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json())
+        this.setResults(_result)
         console.info("getList====>", toJS(this.results));
         setTimeout(() => {
             this.setLoading(false)
@@ -67,14 +67,11 @@ export class GlobalStore {
         this.setLoading(true)
         const key = '5f96323678d05ff0c4eb264ef184556868e303b32a2db88ecbf15746e6f25e02';
         const page = 1;
-
         let result = await fetch(`https://api.unsplash.com/photos/?client_id=${key}&page=${page}&per_page=30`).then(res => res.json()).catch(err => {
             throw err;
         });
         this.imageList = result
-
         console.info("getListImageList====>", toJS(this.imageList));
-
         setTimeout(() => {
             this.setLoading(false)
         }, 550)

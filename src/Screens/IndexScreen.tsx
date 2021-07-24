@@ -3,6 +3,7 @@ import React from "react";
 import {inject, observer} from "mobx-react";
 import {GlobalStore} from "../Stores/GlobalStore";
 import {HistoryStore} from "../Stores/HistoryStore";
+import {ActivityIndicator} from "react-native";
 
 type Props = {
     history: any
@@ -11,47 +12,40 @@ type Props = {
 }
 
 type State = {};
+const globalStore = new GlobalStore()
+export default observer(
+    class IndexScreen extends React.Component<Props, State> {
 
-@inject('globalStore', 'historyStore')
-@observer
-export default class IndexScreen extends React.Component<Props, State> {
+        componentWillMount() {
+            globalStore.getList()
+        }
 
-    componentDidMount() {
-        const {globalStore, historyStore} = this.props
+        render() {
 
-        globalStore.getList()
+            if (globalStore.loading) {
+                return <ActivityIndicator/>
+            }
+
+            return (
+                <div>
+                    <div>
+                        {globalStore.count}
+                    </div>
+                    <button onClick={() => globalStore.incrementCount()}>
+                        dslkflkf
+                    </button>
+                    {globalStore.results.map((item: any) => {
+                        return (
+                            <div>
+                                {item.name}
+                            </div>
+                        )
+                    })}
+                </div>
+            );
+        };
     }
-
-
-    render() {
-
-
-
-        return (
-            <div>
-                <div>
-                    {this.props.globalStore.count}
-                </div>
-                <div>
-                    {this.props.historyStore.testCount}
-                </div>
-                <button onClick={() => this.props.historyStore.incrementCount()}>
-                    historyStore
-                </button>
-                <button onClick={() => this.props.globalStore.incrementCount()}>
-                    sdlfksdfasdasdasd
-                </button>
-                {this.props.globalStore.results.map((item: any) => {
-                    return (
-                        <div>
-                            {item.title}
-                        </div>
-                    )
-                })}
-            </div>
-        );
-    };
-}
+)
 
 ;
 
