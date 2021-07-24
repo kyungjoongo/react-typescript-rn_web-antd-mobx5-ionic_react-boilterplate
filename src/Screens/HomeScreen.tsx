@@ -108,6 +108,9 @@ export const HomeScreen = (props: Props) => {
                     </View>
 
                 }
+                <IonButton fill={'outline'}>
+                    sldkflsdf
+                </IonButton>
             </IonContent>
         </IonPage>
     ))

@@ -22,11 +22,20 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 import WriteScreen from "./Screens/WriteScreen";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
+
+import counterReducer from './Screens/counterReducer';
+import {CounterScreen} from "./Screens/CounterScreen";
 
 type Props = {};
 type State = {
     loading: boolean,
 };
+
+// @ts-ignore
+const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const store = createStore(counterReducer, devTools);
 
 export default class App extends React.Component<Props, State> {
 
@@ -39,15 +48,18 @@ export default class App extends React.Component<Props, State> {
 
     render() {
         return (
-            <IonApp>
-                <IonReactRouter>
-                    <IonRouterOutlet>
-                        <Route path="/" exact component={HomeScreen}/>
-                        <Route path="/DetailScreen" exact component={DetailScreen}/>
-                        <Route path="/WriteScreen" exact component={WriteScreen}/>
-                    </IonRouterOutlet>
-                </IonReactRouter>
-            </IonApp>
+            <Provider store={store}>
+                <IonApp>
+                    <IonReactRouter>
+                        <IonRouterOutlet>
+                            <Route path="/" exact component={HomeScreen}/>
+                            <Route path="/CounterScreen" exact component={CounterScreen}/>
+                            <Route path="/DetailScreen" exact component={DetailScreen}/>
+                            <Route path="/WriteScreen" exact component={WriteScreen}/>
+                        </IonRouterOutlet>
+                    </IonReactRouter>
+                </IonApp>
+            </Provider>
 
         );
     };

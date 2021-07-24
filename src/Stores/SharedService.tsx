@@ -3,6 +3,7 @@ import {autobind} from 'core-decorators';
 import * as Realm from "realm-web";
 import _ from 'lodash'
 
+
 class SharedService {
     constructor() {
 
@@ -21,6 +22,7 @@ class SharedService {
         this.results = arrList;
         console.info("setResults====>", _.cloneDeep(this.results));
     }
+
 
 
     async getList() {

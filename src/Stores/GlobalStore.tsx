@@ -1,6 +1,4 @@
-import {observable, action} from "mobx";
-import {autobind} from 'core-decorators';
-import * as Realm from "realm-web";
+import {action, observable} from "mobx";
 
 
 class GlobalStore {
@@ -10,15 +8,18 @@ class GlobalStore {
 
 
     @observable count = 0;
+    @observable count2 = 0;
 
     @action
     incrementCount() {
         this.count = this.count + 1;
+        this.count2 += 5
     }
 
     @action
     decrementCount() {
         this.count = this.count - 1;
+        this.count2 -= 5;
     }
 
 }
