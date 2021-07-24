@@ -27,11 +27,6 @@ export type TypeLawyer = {
 }
 
 export type TypeBookMark = {
-    clientUserId: any,
-    createDate: any,
-    createdAt: any,
-    lawyerImage: any,
-    lawyerName: any,
-    lawyerUserId: any,
-    _id: any,
+    name: any,
+
 }

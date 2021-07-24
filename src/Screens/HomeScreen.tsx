@@ -1,4 +1,4 @@
-import {ActivityIndicator, Button, Image, Text, View} from "react-native";
+import {ActivityIndicator, Button, Image, Text, View, StyleSheet} from "react-native";
 import React, {useEffect, useRef, useState} from "react";
 import {IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar} from "@ionic/react";
 import {useObserver} from "mobx-react-lite";
@@ -6,6 +6,7 @@ import globalStore from "../Stores/GlobalStore";
 import {getBookmarks} from "./SharedService";
 import {TypeBookMark} from "../Types/Types";
 import {Button as AButton, message} from 'antd'
+import sharedService from "../Stores/SharedService";
 
 type Props = {
     history: any
@@ -26,10 +27,8 @@ export const HomeScreen = (props: Props) => {
     }, [])
 
     async function initFetchData() {
-        setLoading(true)
-        let results: any = await getBookmarks();
-        setResults(results)
-        setLoading(false);
+        await sharedService.getList();
+
     }
 
     async function insertOne() {
@@ -95,25 +94,31 @@ export const HomeScreen = (props: Props) => {
                     <AButton onClick={() => message.success('antd button', 1)} style={{width: '100%'}} type="primary">Primary
                         Button</AButton>
                 </View>
-                {!willMount.current && results.map((item: TypeBookMark, index) => {
-                    return (
-                        <View>
-                            <View style={{margin: 10,}}>
-                                <Image source={{uri: item.lawyerImage}} style={{width: 150, height: 150,}}/>
-                                <Text style={{fontSize: 25}}>{item.lawyerUserId} - {item._id.toString()}</Text>
-                                <Text style={{fontSize: 25}}>{item.lawyerName} </Text>
-                                <Button title={'delete'} onPress={() => {
+                {sharedService.loading ? <View style={{width: window.innerWidth, height: 300, marginTop: 70}}>
+                        <ActivityIndicator color={'orange'} size='large'/>
+                    </View> :
+                    <View style={Styles.test001}>
+                        {sharedService.results.map((item: TypeBookMark, index) => {
+                            return (
+                                <View style={{justifyContent: "center",}}>
+                                    <Text>{item.name}</Text>
+                                </View>
+                            )
+                        })}
+                    </View>
 
-                                    delelteOne(item._id);
-                                }}/>
-                            </View>
-                        </View>
-                    )
-                })}
+                }
             </IonContent>
         </IonPage>
     ))
 }
 
+const Styles = StyleSheet.create({
+    test001: {
+        marginTop: 10,
+        justifyContent: "center",
+        alignItems: 'center',
+    },
+});
 
 
